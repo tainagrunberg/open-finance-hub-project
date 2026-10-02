@@ -1,0 +1,109 @@
+/* ==========================================================
+   Open Finance Hub — extrato.css
+   Estilos só da tela Extrato (inclui o estado de erro de datas).
+   Depende de base.css, layout.css e componentes.css
+   ========================================================== */
+
+/* ---------- Filtros ---------- */
+.filtros { display: flex; flex-wrap: wrap; gap: var(--esp-12); }
+
+.filtros__campo {
+  height: 40px;
+  padding: 0 var(--esp-12);
+  font: var(--font-12-regular);
+  color: var(--cor-tx);
+  background: var(--cor-sf);
+  border: 1px solid var(--cor-ln);
+  border-radius: var(--raio-10);
+}
+.filtros__busca { flex: 1 1 240px; }
+select.filtros__campo { cursor: pointer; }
+
+/* Foco visível nos campos (borda --cor-pri) */
+.filtros__campo:focus-visible {
+  outline: 2px solid var(--cor-pri);
+  outline-offset: 2px;
+  border-color: var(--cor-pri);
+}
+
+/* Estado de erro: aplicado via aria-invalid pelo JS */
+.filtros__campo[aria-invalid="true"] { color: var(--cor-bad); border-color: var(--cor-bad); }
+
+/* Mensagem de erro de período */
+.aviso-erro {
+  padding: var(--esp-12) var(--esp-16);
+  font: var(--font-12-regular);
+  color: var(--cor-bad);
+  background: var(--cor-badbg);
+  border-radius: var(--raio-10);
+}
+
+/* ---------- Filtros aplicados ---------- */
+.aplicados {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-12);
+  flex-wrap: wrap;
+}
+.aplicados__rotulo { margin-bottom: var(--esp-4); font: var(--font-12-regular); color: var(--cor-mu); }
+.chips { display: flex; flex-wrap: wrap; gap: var(--esp-8); }
+.chip {
+  padding: 2px 10px;
+  font: var(--font-12-semibold);
+  font-size: 11px;
+  color: var(--cor-pri);
+  border: 1px solid var(--cor-pri);
+  border-radius: 999px;
+}
+.link-btn {
+  padding: var(--esp-4) var(--esp-8);
+  font: var(--font-12-semibold);
+  color: var(--cor-pri);
+  background: none;
+  border: 0;
+}
+
+/* ---------- Tabela ---------- */
+.tx {
+  padding: var(--esp-12) var(--esp-16);
+  background: var(--cor-sf);
+  border: 1px solid var(--cor-ln);
+  border-radius: var(--raio-14);
+}
+.tx__scroll { overflow-x: auto; }   /* no mobile a tabela rola dentro do card */
+.tx__table { width: 100%; min-width: 560px; border-collapse: collapse; }
+.tx__table th {
+  padding: var(--esp-8) var(--esp-12);
+  font: var(--font-12-semibold);
+  text-align: left;
+  background: var(--cor-pri2);
+}
+.tx__table td {
+  padding: var(--esp-12);
+  font: var(--font-12-regular);
+  font-size: 13px;
+  color: var(--cor-mu);
+  border-bottom: 1px solid var(--cor-ln);
+}
+.tx__table tbody tr:last-child td { border-bottom: 0; }
+.tx__table td:first-child { color: var(--cor-tx); }
+.tx__num { text-align: right !important; }
+.tx__valor { font-weight: 800 !important; color: var(--cor-tx) !important; white-space: nowrap; }
+.tx__valor--pos { color: var(--cor-ok) !important; }
+
+/* ---------- Estado vazio ---------- */
+.vazio { padding: var(--esp-24) var(--esp-16); text-align: center; }
+.vazio__titulo { font: var(--font-14-regular); font-weight: 700; }
+.vazio__texto { font: var(--font-12-regular); color: var(--cor-mu); }
+
+/* hidden precisa vencer o display definido acima */
+.aviso-erro[hidden], .aplicados[hidden], .vazio[hidden], .tx__scroll[hidden] { display: none; }
+
+/* ---------- Total ---------- */
+.total { display: flex; justify-content: space-between; padding: 0 var(--esp-4); font: var(--font-16-extrabold); }
+
+@media (max-width: 900px) {
+  .filtros__campo { flex: 1 1 calc(50% - var(--esp-12)); }
+  .filtros__busca { flex-basis: 100%; }
+}

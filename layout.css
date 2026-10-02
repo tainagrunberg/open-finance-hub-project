@@ -1,0 +1,198 @@
+/* ==========================================================
+   Open Finance Hub — layout.css
+   Estrutura das telas logadas: sidebar, topo, perfil, menu mobile.
+   Depende de base.css
+   ========================================================== */
+
+:root {
+  /* Largura da barra lateral */
+  --largura-sidebar: 232px;
+}
+
+/* ---------- 4. Estrutura geral (desktop) ---------- */
+.app {
+  display: grid;
+  grid-template-columns: var(--largura-sidebar) 1fr;
+  min-height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;   /* evita estouro de largura dentro do grid */
+}
+
+/* ---------- 5. Barra lateral ---------- */
+.sidebar {
+  position: sticky;      /* fixa à esquerda durante a rolagem */
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: var(--esp-24) var(--esp-16);
+  background: var(--cor-sf);
+}
+
+.sidebar__logo {
+  margin: var(--esp-4) var(--esp-4) var(--esp-24);
+  font: var(--font-16-extrabold);
+  font-size: 15px;
+}
+
+.sidebar__logo span { color: var(--cor-pri); margin-left: var(--esp-4); }
+
+/* Itens do menu */
+.menu__list { display: grid; gap: var(--esp-4); }
+
+.menu__link {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-12);
+  padding: var(--esp-12);
+  font: var(--font-14-regular);
+  color: var(--cor-tx);
+  text-decoration: none;
+  border-radius: var(--raio-10);
+}
+
+/* Bolinha à esquerda de cada item */
+.menu__link::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--cor-mu);
+  border-radius: 50%;
+}
+
+.menu__link:hover { background: var(--cor-bg); }
+
+/* Item ativo */
+.menu__link.is-active {
+  font-weight: 600;
+  color: var(--cor-pri);
+  background: var(--cor-pri2);
+}
+.menu__link.is-active::before { background: var(--cor-pri); }
+
+/* Botão Sair (rodapé da sidebar) */
+.logout {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-12);
+  margin-top: auto;     /* empurra para o final */
+  padding: var(--esp-12);
+  font: var(--font-14-regular);
+  color: var(--cor-bad);
+  background: none;
+  border: 0;
+  border-radius: var(--raio-10);
+}
+
+.logout::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--cor-bad);
+  border-radius: 50%;
+}
+
+.logout:hover { background: var(--cor-badbg); }
+
+/* ---------- 6. Topo (header) ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-16);
+  height: 72px;
+  padding: 0 var(--esp-24) 0 var(--esp-24);
+  background: var(--cor-sf);
+}
+
+.topbar__left { display: flex; align-items: center; gap: var(--esp-12); }
+
+.topbar__title { font: var(--font-22-extrabold); }
+
+/* Perfil do usuário */
+.profile { display: flex; align-items: center; gap: var(--esp-12); }
+
+.profile__avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  font: var(--font-12-semibold);
+  font-weight: 800;
+  color: var(--cor-on);
+  background: var(--cor-pri);
+  border-radius: 50%;
+}
+
+.profile__info { display: flex; flex-direction: column; }
+.profile__name { font: var(--font-12-semibold); font-weight: 700; font-size: 13px; }
+.profile__email { font: var(--font-12-regular); color: var(--cor-mu); }
+
+/* Hambúrguer: escondido no desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 40px;
+  height: 40px;
+  padding: 0 var(--esp-8);
+  background: none;
+  border: 1px solid var(--cor-ln);
+  border-radius: var(--raio-10);
+}
+
+.hamburger__bar {
+  height: 2px;
+  background: var(--cor-tx);
+  border-radius: 2px;
+}
+
+/* ---------- Área principal (padding e espaçamento padrão das telas) ---------- */
+.main {
+  display: grid;
+  gap: var(--esp-24);
+  align-content: start;
+  padding: var(--esp-24) 32px;
+}
+
+/* ---------- 9. Overlay do menu mobile ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: rgba(15, 27, 45, 0.45);
+}
+.overlay[hidden] { display: none; }
+
+/* ---------- Responsividade do layout ---------- */
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; }
+
+  /* Sidebar vira menu lateral que desliza por cima do conteúdo */
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    width: 260px;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+  .sidebar.is-open { transform: translateX(0); }
+
+  .hamburger { display: flex; }
+
+  .topbar { padding: 0 var(--esp-16); }
+  .topbar__title { font-size: 20px; }
+  .profile__email { display: none; }
+
+  .main { padding: var(--esp-16); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar { transition: none; }
+}

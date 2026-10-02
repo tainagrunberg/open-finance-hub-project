@@ -1,0 +1,77 @@
+/* ==========================================================
+   Open Finance Hub — base.css
+   Design System + reset, compartilhados por TODAS as telas.
+   Toda página nova deve carregar este arquivo primeiro.
+   ========================================================== */
+
+/* ---------- 1. Design System (variáveis globais) ---------- */
+:root {
+  /* Cores */
+  --cor-pri:   rgba(30, 58, 138, 1);     /* Azul escuro principal */
+  --cor-pri2:  rgba(228, 235, 251, 1);   /* Fundo de chips/avisos */
+  --cor-on:    rgba(255, 255, 255, 1);   /* Texto sobre primária */
+  --cor-ok:    rgba(11, 138, 76, 1);     /* Verde sucesso */
+  --cor-okbg:  rgba(224, 244, 234, 1);   /* Fundo sucesso */
+  --cor-bad:   rgba(198, 40, 40, 1);     /* Vermelho erro */
+  --cor-badbg: rgba(253, 234, 234, 1);   /* Fundo erro */
+  --cor-wn:    rgba(154, 91, 0, 1);      /* Atenção */
+  --cor-wnbg:  rgba(255, 241, 214, 1);   /* Fundo atenção */
+  --cor-bg:    rgba(233, 237, 244, 1);   /* Fundo da página */
+  --cor-sf:    rgba(255, 255, 255, 1);   /* Superfícies/cards */
+  --cor-tx:    rgba(15, 27, 45, 1);      /* Texto principal */
+  --cor-mu:    rgba(91, 107, 130, 1);    /* Texto de apoio */
+  --cor-ln:    rgba(219, 226, 236, 1);   /* Bordas e divisores */
+
+  /* Tipografia (Inter) — shorthand: peso tamanho/altura-de-linha família */
+  --font-28-extrabold: 800 28px/1.2 "Inter", sans-serif;  /* Patrimônio total */
+  --font-22-extrabold: 800 22px/1.2 "Inter", sans-serif;  /* Título de tela */
+  --font-16-extrabold: 800 16px/1.3 "Inter", sans-serif;  /* Título de seção */
+  --font-14-regular:   400 14px/1.4 "Inter", sans-serif;  /* Corpo e valores */
+  --font-12-semibold:  600 12px/1.4 "Inter", sans-serif;  /* Rótulo */
+  --font-12-regular:   400 12px/1.4 "Inter", sans-serif;  /* Apoio e legendas */
+
+  /* Espaçamentos */
+  --esp-4:  4px;
+  --esp-8:  8px;
+  --esp-12: 12px;
+  --esp-16: 16px;
+  --esp-24: 24px;
+
+  /* Raios */
+  --raio-10: 10px;  /* inputs */
+  --raio-14: 14px;  /* cards */
+  --raio-20: 20px;  /* sheets */
+}
+
+/* ---------- 2. Reset básico ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font: var(--font-14-regular);
+  color: var(--cor-tx);
+  background: var(--cor-bg);
+}
+
+h1, h2, h3, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+
+button { font: inherit; cursor: pointer; }
+
+/* Texto só para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- 3. Foco visível (links e botões de todas as telas) ---------- */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--cor-pri);
+  outline-offset: 2px;
+  border-radius: var(--raio-10);
+}
