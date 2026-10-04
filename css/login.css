@@ -200,26 +200,85 @@
 
 /* ---------- 10. Responsividade ---------- */
 
-/* Tablet/mobile: painel azul vira um cabeçalho compacto no topo */
+/* Mobile (Figma): página branca, sem faixa azul; a marca vira texto azul no topo.
+   Só valores acima de 800px (desktop) ficam intactos. */
 @media (max-width: 800px) {
   .login {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
+    background: var(--cor-sf);
   }
 
+  /* Marca: texto azul sobre fundo branco. O padding lateral acompanha
+     a caixa do formulário (centralizada em até 400px) para alinhar os dois */
   .login__brand {
-    padding: var(--esp-16) var(--esp-24);
+    gap: 0;
+    padding: 32px max(var(--esp-16), calc((100% - 400px) / 2)) 10px;
+    background: none;
+    color: var(--cor-pri);
   }
 
-  .login__brand-title { font-size: 22px; }
+  .login__brand-title { font-size: 18px; }
 
   /* Texto de apoio escondido para o formulário ficar em foco */
   .login__brand-text { display: none; }
 
   .login__panel {
     align-items: flex-start;
-    padding: var(--esp-24);
+    padding: 0 var(--esp-16) var(--esp-24);
+    background: none;
   }
+
+  .login__box { margin: 0 auto; }
+
+  .login__title {
+    margin-bottom: var(--esp-8);
+    font-size: 24px;
+  }
+
+  /* Campos */
+  .field { margin-bottom: var(--esp-8); }
+
+  .field__label {
+    margin-bottom: 9px;
+    font-size: 13px;
+    line-height: 16px;
+  }
+
+  .field__input {
+    height: 47px;
+    padding-left: 14px;
+    font-size: 15px;
+  }
+
+  .field__toggle { font-size: 13px; }
+
+  /* Regras da senha */
+  /* margin-top negativo soma com o margin-bottom do campo acima (8px - 2px = 6px) */
+  .rules {
+    margin: -2px 0 var(--esp-8);
+    font-size: 13px;
+  }
+
+  .rules__item { line-height: 19.5px; }
+
+  /* Checkbox */
+  .check { margin-bottom: var(--esp-8); }
+
+  .check__input {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Botão e links */
+  .btn {
+    height: 47px;
+    font-size: 15px;
+  }
+
+  .links { margin-top: 6px; }
+
+  .links__item { font-size: 14px; }
 }
 
 /* Respeita quem prefere menos movimento */
