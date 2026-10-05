@@ -1,7 +1,4 @@
-
-
-
-const SALDO_INICIAL = 3030;            
+  const SALDO_INICIAL = 3030;            
 const INICIO = { ano: 2026, mes: 8 };  
 const QTD_MESES = 7;                   
 
@@ -45,24 +42,41 @@ document.getElementById('flx-rec-lista').replaceChildren(...recorrentes.map((r) 
 }));
 
 
-const W = 520, H = 200;
-const margem = { esq: 16, dir: 24, topo: 16, base: 28 };
-const maximo = Math.max(...pontos.map((p) => p.saldo), 1);
+const svg = document.getElementById('flx-chart');
+const mobile = window.matchMedia('(max-width: 900px)');
 
-const x = (i) => margem.esq + ((W - margem.esq - margem.dir) * i) / (pontos.length - 1);
-const y = (v) => margem.topo + (H - margem.topo - margem.base) * (1 - Math.max(v, 0) / maximo);
-const yBase = H - margem.base;
+function desenharGrafico() {
+  const ehMobile = mobile.matches;
 
-const coords = pontos.map((p, i) => `${x(i).toFixed(1)},${y(p.saldo).toFixed(1)}`);
-const area = `M${x(0)},${yBase} L${coords.join(' L')} L${x(pontos.length - 1)},${yBase} Z`;
+  /* Desktop: viewBox fixo e escalável. Mobile: 1 unidade = 1px (largura real do card),
+     para linha, pontos e textos manterem o tamanho definido no Figma. */
+  const W = ehMobile ? Math.round(svg.getBoundingClientRect().width) || 373 : 520;
+  const H = ehMobile ? 173 : 200;
+  const margem = ehMobile
+    ? { esq: 14, dir: 19, topo: 33, base: 37 }
+    : { esq: 16, dir: 24, topo: 16, base: 28 };
+  const yRotulo = H - (ehMobile ? 11 : 8);
 
-document.getElementById('flx-chart').innerHTML =
-  `<path class="flx-chart__area" d="${area}"/>` +
-  `<polyline class="flx-chart__linha" points="${coords.join(' ')}"/>` +
-  pontos.map((p, i) =>
-    `<circle class="flx-chart__ponto" cx="${x(i)}" cy="${y(p.saldo).toFixed(1)}" r="4"/>` +
-    `<text class="flx-chart__eixo" x="${x(i)}" y="${H - 8}" text-anchor="middle">${p.rotulo}</text>`
-  ).join('');
+  const maximo = Math.max(...pontos.map((p) => p.saldo), 1);
+  const x = (i) => margem.esq + ((W - margem.esq - margem.dir) * i) / (pontos.length - 1);
+  const y = (v) => margem.topo + (H - margem.topo - margem.base) * (1 - Math.max(v, 0) / maximo);
+  const yBase = H - margem.base;
+
+  const coords = pontos.map((p, i) => `${x(i).toFixed(1)},${y(p.saldo).toFixed(1)}`);
+  const area = `M${x(0)},${yBase} L${coords.join(' L')} L${x(pontos.length - 1)},${yBase} Z`;
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML =
+    `<path class="flx-chart__area" d="${area}"/>` +
+    `<polyline class="flx-chart__linha" points="${coords.join(' ')}"/>` +
+    pontos.map((p, i) =>
+      `<circle class="flx-chart__ponto" cx="${x(i).toFixed(1)}" cy="${y(p.saldo).toFixed(1)}" r="4"/>` +
+      `<text class="flx-chart__eixo" x="${x(i).toFixed(1)}" y="${yRotulo}" text-anchor="middle">${p.rotulo}</text>`
+    ).join('');
+}
+
+desenharGrafico();
+window.addEventListener('resize', desenharGrafico);
 
 
 document.getElementById('flx-tabela').innerHTML =
