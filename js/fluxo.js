@@ -1,13 +1,9 @@
-/* ==========================================================
-   Open Finance Hub — fluxo.js
-   Calcula a projeção de saldo e desenha o gráfico em SVG.
-   O menu e o logout ficam em layout.js.
-   ========================================================== */
 
-// Dados de exemplo (troque pelos seus)
-const SALDO_INICIAL = 3030;            // saldo em Set/2026
-const INICIO = { ano: 2026, mes: 8 };  // mês 8 = Setembro (0 = Janeiro)
-const QTD_MESES = 7;                   // Set → Mar
+
+
+const SALDO_INICIAL = 3030;            
+const INICIO = { ano: 2026, mes: 8 };  
+const QTD_MESES = 7;                   
 
 const recorrentes = [
   { nome: 'Salário · todo dia 10', valor: 5200 },
@@ -17,13 +13,13 @@ const recorrentes = [
 
 const MESES = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 
-// -1800 -> "−R$ 1.800,00"
+
 function moeda(n) {
   const numero = Math.abs(n).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   return `${n < 0 ? '−' : ''}R$ ${numero}`;
 }
 
-/* ---------- 1. Projeção: saldo inicial + (soma dos recorrentes × meses) ---------- */
+
 const liquidoMensal = recorrentes.reduce((soma, r) => soma + r.valor, 0);
 
 const pontos = Array.from({ length: QTD_MESES }, (_, i) => {
@@ -32,11 +28,11 @@ const pontos = Array.from({ length: QTD_MESES }, (_, i) => {
 });
 const ultimo = pontos[pontos.length - 1];
 
-/* ---------- 2. Textos do card principal ---------- */
+
 document.getElementById('flx-mes').textContent = `${ultimo.rotulo}/${ultimo.ano}`;
 document.getElementById('flx-saldo').textContent = moeda(ultimo.saldo);
 
-/* ---------- 3. Lista de recorrentes ---------- */
+
 document.getElementById('flx-rec-lista').replaceChildren(...recorrentes.map((r) => {
   const li = document.createElement('li');
   const nome = document.createElement('span');
@@ -48,7 +44,7 @@ document.getElementById('flx-rec-lista').replaceChildren(...recorrentes.map((r) 
   return li;
 }));
 
-/* ---------- 4. Gráfico SVG (viewBox 520×200, escala de 0 ao maior saldo) ---------- */
+
 const W = 520, H = 200;
 const margem = { esq: 16, dir: 24, topo: 16, base: 28 };
 const maximo = Math.max(...pontos.map((p) => p.saldo), 1);
@@ -68,7 +64,7 @@ document.getElementById('flx-chart').innerHTML =
     `<text class="flx-chart__eixo" x="${x(i)}" y="${H - 8}" text-anchor="middle">${p.rotulo}</text>`
   ).join('');
 
-/* ---------- 5. Tabela equivalente para leitores de tela ---------- */
+
 document.getElementById('flx-tabela').innerHTML =
   '<caption>Saldo projetado por mês</caption>' +
   '<tr><th scope="col">Mês</th><th scope="col">Saldo</th></tr>' +

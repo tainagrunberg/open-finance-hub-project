@@ -1,23 +1,17 @@
-/* ==========================================================
-   Open Finance Hub — login.css (estilos só da tela de Login)
-   Depende de base.css
-   ========================================================== */
-
-/* Foco do checkbox (links e botões já estão no base.css) */
-.check__input:focus-visible {
+ .check__input:focus-visible {
   outline: 2px solid var(--cor-pri);
   outline-offset: 2px;
   border-radius: var(--esp-4);
 }
 
-/* ---------- 4. Layout split-screen (desktop) ---------- */
+
 .login {
   display: grid;
-  grid-template-columns: 4fr 5fr;   /* painel azul ≈ 44% / formulário ≈ 56% */
+  grid-template-columns: 4fr 5fr;   
   min-height: 100vh;
 }
 
-/* Painel esquerdo */
+
 .login__brand {
   display: flex;
   flex-direction: column;
@@ -30,16 +24,16 @@
 
 .login__brand-title {
   font: var(--font-28-extrabold);
-  font-size: 34px;          /* título de marca um pouco maior que o token de 28px */
+  font-size: 34px;         
 }
 
 .login__brand-text {
   max-width: 430px;
-  font-size: 16px;          /* texto de apoio da marca, maior que o corpo padrão */
+  font-size: 16px;         
   line-height: 1.25;
 }
 
-/* Painel direito */
+
 .login__panel {
   display: flex;
   align-items: center;
@@ -58,7 +52,7 @@
   font: var(--font-22-extrabold);
 }
 
-/* ---------- 5. Campos ---------- */
+
 .field { margin-bottom: var(--esp-16); }
 
 .field__label {
@@ -80,14 +74,14 @@
 
 .field__input::placeholder { color: var(--cor-mu); }
 
-/* Foco do input: borda na cor primária */
+
 .field__input:focus-visible {
   outline: none;
   border-color: var(--cor-pri);
   box-shadow: 0 0 0 1px var(--cor-pri);
 }
 
-/* Campo de senha: input + botão "Mostrar" dentro da mesma caixa */
+
 .field__password {
   position: relative;
   display: flex;
@@ -107,7 +101,7 @@
   cursor: pointer;
 }
 
-/* ---------- 6. Regras da senha ---------- */
+
 .rules {
   display: grid;
   gap: 0;
@@ -119,16 +113,16 @@
   display: flex;
   align-items: center;
   gap: var(--esp-4);
-  color: var(--cor-bad);       /* estado padrão: não atendida */
+  color: var(--cor-bad);      
   line-height: 18px;
 }
 
-/* Estado atendido (classe adicionada via JS) */
+
 .rules__item.is-ok { color: var(--cor-ok); }
 
 .rules__icon { width: 10px; text-align: center; }
 
-/* ---------- 7. Checkbox ---------- */
+
 .check {
   display: flex;
   align-items: center;
@@ -161,7 +155,7 @@
   cursor: pointer;
 }
 
-/* ---------- 8. Botão principal ---------- */
+
 .btn {
   width: 100%;
   height: 43px;
@@ -176,13 +170,13 @@
 
 .btn:hover { filter: brightness(1.12); }
 
-/* Foco do botão: anel na cor primária com afastamento */
+
 .btn:focus-visible {
   outline: 2px solid var(--cor-pri);
   outline-offset: 3px;
 }
 
-/* ---------- 9. Links secundários ---------- */
+
 .links {
   display: flex;
   justify-content: space-between;
@@ -198,19 +192,16 @@
 
 .links__item:hover { text-decoration: underline; }
 
-/* ---------- 10. Responsividade ---------- */
 
-/* Mobile (Figma): página branca, sem faixa azul; a marca vira texto azul no topo.
-   Só valores acima de 800px (desktop) ficam intactos. */
-@media (max-width: 800px) {
+
+  @media (max-width: 800px) {
   .login {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     background: var(--cor-sf);
   }
 
-  /* Marca: texto azul sobre fundo branco. O padding lateral acompanha
-     a caixa do formulário (centralizada em até 400px) para alinhar os dois */
+  
   .login__brand {
     gap: 0;
     padding: 32px max(var(--esp-16), calc((100% - 400px) / 2)) 10px;
@@ -220,7 +211,7 @@
 
   .login__brand-title { font-size: 18px; }
 
-  /* Texto de apoio escondido para o formulário ficar em foco */
+
   .login__brand-text { display: none; }
 
   .login__panel {
@@ -236,7 +227,7 @@
     font-size: 24px;
   }
 
-  /* Campos */
+
   .field { margin-bottom: var(--esp-8); }
 
   .field__label {
@@ -253,8 +244,7 @@
 
   .field__toggle { font-size: 13px; }
 
-  /* Regras da senha */
-  /* margin-top negativo soma com o margin-bottom do campo acima (8px - 2px = 6px) */
+
   .rules {
     margin: -2px 0 var(--esp-8);
     font-size: 13px;
@@ -262,7 +252,7 @@
 
   .rules__item { line-height: 19.5px; }
 
-  /* Checkbox */
+
   .check { margin-bottom: var(--esp-8); }
 
   .check__input {
@@ -270,7 +260,7 @@
     height: 20px;
   }
 
-  /* Botão e links */
+
   .btn {
     height: 47px;
     font-size: 15px;
@@ -281,7 +271,7 @@
   .links__item { font-size: 14px; }
 }
 
-/* Respeita quem prefere menos movimento */
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }

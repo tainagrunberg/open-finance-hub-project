@@ -1,24 +1,17 @@
-/* ==========================================================
-   Open Finance Hub — instituicoes.css
-   Estilos só da tela Gestão de Instituições.
-   Depende de base.css, layout.css e componentes.css
-   ========================================================== */
-
-/* Texto de apoio abaixo do título */
-.intro {
+  .intro {
   font: var(--font-14-regular);
   color: var(--cor-mu);
 }
 
-/* ---------- Grid de cards ---------- */
-/* Cards de até 340px lado a lado; empilha em 1 coluna quando falta espaço */
+
+
 .conn-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 340px));
   gap: 20px;
 }
 
-/* ---------- Card de instituição ---------- */
+
 .conn {
   display: flex;
   flex-direction: column;
@@ -30,7 +23,7 @@
   border-radius: var(--raio-14);
 }
 
-/* Topo: logo + nome/descrição + badge */
+
 .conn__top {
   display: flex;
   align-items: center;
@@ -42,7 +35,7 @@
 .conn__name { font: var(--font-14-regular); font-weight: 700; }
 .conn__desc { font: var(--font-12-regular); color: var(--cor-mu); }
 
-/* ---------- Badge de status ---------- */
+
 .badge {
   flex: none;
   padding: 2px 9px;
@@ -52,19 +45,19 @@
   border-radius: 999px;
 }
 
-/* Conectado */
+
 .badge--on {
   color: var(--cor-ok);
   background: var(--cor-okbg);
 }
 
-/* Desconectado */
+
 .badge--off {
   color: var(--cor-tx);
   background: var(--cor-bg);
 }
 
-/* ---------- Botão de ação (100% da largura do card) ---------- */
+
 .conn__btn {
   width: 100%;
   height: 44px;
@@ -73,7 +66,7 @@
   border-radius: var(--raio-10);
 }
 
-/* Outline: "Revogar acesso" */
+
 .conn__btn--outline {
   color: var(--cor-pri);
   background: transparent;
@@ -81,7 +74,7 @@
 }
 .conn__btn--outline:hover { background: var(--cor-pri2); }
 
-/* Solid: "Conectar" */
+
 .conn__btn--solid {
   color: var(--cor-on);
   background: var(--cor-pri);
@@ -89,17 +82,15 @@
 }
 .conn__btn--solid:hover { filter: brightness(1.12); }
 
-/* Foco visível nos botões dos cards (anel na cor primária) */
+
 .conn__btn:focus-visible {
   outline: 2px solid var(--cor-pri);
   outline-offset: 2px;
 }
 
-/* ---------- Modal de confirmação ---------- */
+  
 
-/* Overlay: cobre a tela inteira (inclusive a sidebar) e centraliza o pop-up */
-
-.modal {
+  .modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -112,10 +103,10 @@
   background: rgba(15, 27, 45, 0.6);
 }
 
-/* Escondido */
+
 .modal.hidden { display: none; }
 
-/* Container do pop-up */
+
 .modal__box {
   display: flex;
   flex-direction: column;
@@ -141,7 +132,7 @@
   color: var(--cor-mu);
 }
 
-/* Botões lado a lado, 50/50 */
+
 .modal__actions {
   display: flex;
   gap: var(--esp-16);
@@ -156,28 +147,28 @@
   cursor: pointer;
 }
 
-/* Voltar: outline */
+
 .modal__btn--outline {
   background: transparent;
   border: 1px solid var(--cor-pri);
   color: var(--cor-pri);
 }
 
-/* Revogar: sólido vermelho */
+
 .modal__btn--danger {
   background: var(--cor-bad);
   border: none;
   color: var(--cor-on);
 }
 
-/* ---------- Responsividade da tela ---------- */
+
 @media (max-width: 900px) {
   .conn-list { grid-template-columns: 1fr; }
 }
 
-/* ---------- Modal "Confirmar dados" (conectar) ---------- */
 
-/* Lista de dados */
+
+
 .modal__row {
   display: flex;
   justify-content: space-between;
@@ -195,7 +186,7 @@
   color: var(--cor-tx);
 }
 
-/* Caixa de aviso */
+
 .modal__info {
   padding: var(--esp-12);
   font-size: 12px;
@@ -204,7 +195,7 @@
   border-radius: var(--raio-10);
 }
 
-/* Botão Confirmar: sólido azul */
+
 .modal__btn--solid {
   background: var(--cor-pri);
   border: none;

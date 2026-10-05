@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Instituições · Open Finance Hub</title>
 
-  <!-- Fonte Inter (Google Fonts) -->
+ 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -19,17 +19,17 @@
 
   <div class="app">
 
-    <!-- Fundo escuro atrás do menu no mobile (fecha o menu ao clicar) -->
+    
     <div class="overlay" id="overlay" hidden></div>
 
-    <!-- ===== Barra lateral ===== -->
+    
     <aside class="sidebar" id="sidebar">
       <p class="sidebar__logo">Open <span>Finance</span></p>
 
       <nav class="menu" aria-label="Navegação principal">
         <ul class="menu__list">
           <li><a href="inicio.html" class="menu__link">Início</a></li>
-          <!-- Página atual -->
+          
           <li><a href="instituicoes.html" class="menu__link is-active" aria-current="page">Instituições</a></li>
           <li><a href="extrato.html" class="menu__link">Extrato</a></li>
           <li><a href="fluxo.html" class="menu__link">Fluxo</a></li>
@@ -39,10 +39,10 @@
       <button type="button" class="logout" id="btn-sair">Sair</button>
     </aside>
 
-    <!-- ===== Área principal ===== -->
+    
     <div class="content">
 
-      <!-- Topo: título da tela + perfil -->
+      
       <header class="topbar">
         <div class="topbar__left">
           <button
@@ -72,10 +72,10 @@
 
         <p class="intro">Escolha quais instituições compartilham dados com o Hub.</p>
 
-        <!-- Grid de cards de instituição -->
+        
         <ul class="conn-list" id="lista-instituicoes">
 
-          <!-- Nubank: conectado -->
+          
           <li>
             <article class="conn conn--on" data-nome="Nubank">
               <div class="conn__top">
@@ -90,7 +90,7 @@
             </article>
           </li>
 
-          <!-- Inter: conectado -->
+          
           <li>
             <article class="conn conn--on" data-nome="Inter">
               <div class="conn__top">
@@ -105,7 +105,7 @@
             </article>
           </li>
 
-          <!-- Itaú: desconectado -->
+          
           <li>
             <article class="conn conn--off" data-nome="Itaú">
               <div class="conn__top">
@@ -122,14 +122,14 @@
 
         </ul>
 
-        <!-- Avisa leitores de tela quando o estado de um card muda -->
+       
         <p class="sr-only" id="aviso-status" role="status" aria-live="polite"></p>
 
       </main>
     </div>
   </div>
 
-<!-- ===== Modal de confirmação: revogar acesso ===== -->
+
 <div class="modal hidden" id="modal-revogar">
   <div
     class="modal__box"
@@ -149,7 +149,7 @@
   </div>
 </div>
 
-<!-- ===== Modal de confirmação: conectar instituição ===== -->
+
 <div class="modal hidden" id="modal-conectar">
   <div
     class="modal__box"
@@ -158,8 +158,7 @@
     aria-labelledby="modal-conectar-titulo">
     <h2 class="modal__title" id="modal-conectar-titulo">Confirme os dados antes de conectar</h2>
 
-    <!-- Dados da conexão (só a instituição é dinâmica) -->
-    <ul class="modal__list">
+    
       <li class="modal__row">
         <span class="modal__label">Instituição</span>
         <span class="modal__value" id="modal-conectar-instituicao">Itaú</span>

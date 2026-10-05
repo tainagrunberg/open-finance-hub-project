@@ -1,15 +1,9 @@
-/* ==========================================================
-   Open Finance Hub — layout.css
-   Estrutura das telas logadas: sidebar, topo, perfil, menu mobile.
-   Depende de base.css
-   ========================================================== */
-
 :root {
-  /* Largura da barra lateral */
+
   --largura-sidebar: 232px;
 }
 
-/* ---------- 4. Estrutura geral (desktop) ---------- */
+
 .app {
   display: grid;
   grid-template-columns: var(--largura-sidebar) 1fr;
@@ -19,12 +13,12 @@
 .content {
   display: flex;
   flex-direction: column;
-  min-width: 0;   /* evita estouro de largura dentro do grid */
+  min-width: 0;   
 }
 
-/* ---------- 5. Barra lateral ---------- */
+
 .sidebar {
-  position: sticky;      /* fixa à esquerda durante a rolagem */
+  position: sticky;      
   top: 0;
   display: flex;
   flex-direction: column;
@@ -41,7 +35,7 @@
 
 .sidebar__logo span { color: var(--cor-pri); margin-left: var(--esp-4); }
 
-/* Itens do menu */
+
 .menu__list { display: grid; gap: var(--esp-4); }
 
 .menu__link {
@@ -55,7 +49,7 @@
   border-radius: var(--raio-10);
 }
 
-/* Bolinha à esquerda de cada item */
+
 .menu__link::before {
   content: "";
   width: 8px;
@@ -66,7 +60,7 @@
 
 .menu__link:hover { background: var(--cor-bg); }
 
-/* Item ativo */
+
 .menu__link.is-active {
   font-weight: 600;
   color: var(--cor-pri);
@@ -74,12 +68,12 @@
 }
 .menu__link.is-active::before { background: var(--cor-pri); }
 
-/* Botão Sair (rodapé da sidebar) */
+
 .logout {
   display: flex;
   align-items: center;
   gap: var(--esp-12);
-  margin-top: auto;     /* empurra para o final */
+  margin-top: auto;     
   padding: var(--esp-12);
   font: var(--font-14-regular);
   color: var(--cor-bad);
@@ -98,7 +92,7 @@
 
 .logout:hover { background: var(--cor-badbg); }
 
-/* ---------- 6. Topo (header) ---------- */
+
 .topbar {
   display: flex;
   align-items: center;
@@ -113,7 +107,7 @@
 
 .topbar__title { font: var(--font-22-extrabold); }
 
-/* Perfil do usuário */
+
 .profile { display: flex; align-items: center; gap: var(--esp-12); }
 
 .profile__avatar {
@@ -132,7 +126,7 @@
 .profile__name { font: var(--font-12-semibold); font-weight: 700; font-size: 13px; }
 .profile__email { font: var(--font-12-regular); color: var(--cor-mu); }
 
-/* Hambúrguer: escondido no desktop */
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -152,7 +146,7 @@
   border-radius: 2px;
 }
 
-/* ---------- Área principal (padding e espaçamento padrão das telas) ---------- */
+
 .main {
   display: grid;
   gap: var(--esp-24);
@@ -160,7 +154,7 @@
   padding: var(--esp-24) 32px;
 }
 
-/* ---------- 9. Overlay do menu mobile ---------- */
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -169,30 +163,64 @@
 }
 .overlay[hidden] { display: none; }
 
-/* ---------- Responsividade do layout ---------- */
+
 @media (max-width: 900px) {
+  
+  :root { --altura-tabbar: 48px; }
+
   .app { grid-template-columns: 1fr; }
 
-  /* Sidebar vira menu lateral que desliza por cima do conteúdo */
+
+  .content { padding-bottom: calc(var(--altura-tabbar) + env(safe-area-inset-bottom, 0px)); }
+
+  
   .sidebar {
     position: fixed;
-    inset: 0 auto 0 0;
+    inset: auto 0 0 0;
     z-index: 20;
-    width: 260px;
-    transform: translateX(-100%);
-    transition: transform 0.2s ease;
+    width: auto;
+    height: calc(var(--altura-tabbar) + env(safe-area-inset-bottom, 0px));
+    padding: 0 0 env(safe-area-inset-bottom, 0px);
+    background: var(--cor-sf);
+    border-top: 1px solid var(--cor-ln);
   }
-  .sidebar.is-open { transform: translateX(0); }
 
-  .hamburger { display: flex; }
+  .sidebar__logo,
+  .logout { display: none; }
+
+  .menu { height: 100%; }
+
+  .menu__list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    height: 100%;
+  }
+
+  .menu__list li { display: flex; }
+
+  .menu__link {
+    flex: 1;
+    justify-content: center;
+    padding: 0 var(--esp-4);
+    font: var(--font-12-semibold);
+    color: var(--cor-mu);
+    text-align: center;
+    border-radius: 0;
+  }
+
+  
+  .menu__link::before { display: none; }
+  .menu__link:hover { background: none; }
+
+  .menu__link.is-active {
+    font-weight: 700;
+    color: var(--cor-pri);
+    background: none;
+  }
 
   .topbar { padding: 0 var(--esp-16); }
   .topbar__title { font-size: 20px; }
   .profile__email { display: none; }
 
   .main { padding: var(--esp-16); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sidebar { transition: none; }
-}
+  }

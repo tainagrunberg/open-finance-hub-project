@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fluxo · Open Finance Hub</title>
 
-  <!-- Fonte Inter (Google Fonts) -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -19,10 +19,10 @@
 
   <div class="app">
 
-    <!-- Fundo escuro atrás do menu no mobile (fecha o menu ao clicar) -->
+    
     <div class="overlay" id="overlay" hidden></div>
 
-    <!-- ===== Barra lateral ===== -->
+    
     <aside class="sidebar" id="sidebar">
       <p class="sidebar__logo">Open <span>Finance</span></p>
 
@@ -38,10 +38,10 @@
       <button type="button" class="logout" id="btn-sair">Sair</button>
     </aside>
 
-    <!-- ===== Área principal ===== -->
+    
     <div class="content">
 
-      <!-- Topo: título da tela + perfil -->
+      
       <header class="topbar">
         <div class="topbar__left">
           <button
@@ -71,16 +71,16 @@
 
         <div class="flx">
 
-          <!-- Card do gráfico -->
+          
           <section class="flx-card" aria-labelledby="flx-rotulo">
             <p class="flx-card__label" id="flx-rotulo">Saldo projetado em <span id="flx-mes">Mar/2027</span></p>
             <p class="flx-card__total" id="flx-saldo">R$ 22.350,00</p>
             <svg class="flx-chart" id="flx-chart" viewBox="0 0 520 200" role="img" aria-label="Gráfico de linha da evolução do saldo projetado"></svg>
-            <!-- Alternativa em tabela para leitores de tela (preenchida pelo JS) -->
+            
             <table class="sr-only" id="flx-tabela"></table>
           </section>
 
-          <!-- Card dos recorrentes -->
+          
           <section class="flx-card flx-rec" aria-labelledby="flx-rec-titulo">
             <h2 class="flx-rec__title" id="flx-rec-titulo">Recorrentes considerados</h2>
             <ul id="flx-rec-lista"></ul>

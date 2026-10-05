@@ -1,10 +1,6 @@
-/* ==========================================================
-   Open Finance Hub — extrato.js
-   Filtros em tempo real + validação de período (De > Até).
-   O menu e o logout ficam em layout.js.
-   ========================================================== */
 
-// Dados de exemplo (troque pelos seus). Datas no formato AAAA-MM-DD.
+
+
 const transacoes = [
   { desc: 'Supermercado Extra', inst: 'Nubank', cat: 'Alimentação', data: '2026-09-12', valor: -186.40 },
   { desc: 'Lanchonete Sabor',   inst: 'Inter',  cat: 'Alimentação', data: '2026-09-05', valor: -32.90 },
@@ -23,25 +19,25 @@ const campos = {
   ate:   document.getElementById('ate'),
 };
 
-/* ---------- Formatadores ---------- */
-// "2026-09" -> "Set/2026"
+
+
 function rotuloMes(valor) {
   const [ano, mes] = valor.split('-');
   return `${MESES[Number(mes) - 1]}/${ano}`;
 }
 
-// "2026-09-12" -> "12/09/2026"
+
 function dataBR(iso) {
   return iso.split('-').reverse().join('/');
 }
 
-// -186.4 -> "−R$ 186,40"
+
 function moeda(n) {
   const numero = Math.abs(n).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   return `${n < 0 ? '−' : ''}R$ ${numero}`;
 }
 
-// Texto do chip de período: "Jan a Set/2026" (mesmo ano) ou "Set/2026 a Jan/2027"
+
 function textoPeriodo(de, ate) {
   if (de && ate) {
     const mesmoAno = de.slice(0, 4) === ate.slice(0, 4);
@@ -50,12 +46,12 @@ function textoPeriodo(de, ate) {
   return de ? `A partir de ${rotuloMes(de)}` : `Até ${rotuloMes(ate)}`;
 }
 
-/* ---------- Atualiza a tela inteira a partir dos filtros ---------- */
+
 function atualizar() {
   const { busca, inst, cat, de, ate } = campos;
   const periodoInvalido = Boolean(de.value && ate.value && de.value > ate.value);
 
-  // 1) Validação de datas: borda vermelha + mensagem
+  
   [de, ate].forEach((campo) => campo.setAttribute('aria-invalid', String(periodoInvalido)));
   const erro = document.getElementById('erro-datas');
   erro.hidden = !periodoInvalido;
@@ -63,7 +59,7 @@ function atualizar() {
     erro.textContent = `A data inicial (${rotuloMes(de.value)}) não pode ser depois da final (${rotuloMes(ate.value)}). Ajuste o período.`;
   }
 
-  // 2) Filtragem (período inválido = nenhum resultado)
+  
   const termo = busca.value.trim().toLowerCase();
   const lista = periodoInvalido ? [] : transacoes.filter((t) => {
     const mes = t.data.slice(0, 7);
@@ -74,7 +70,7 @@ function atualizar() {
       && (!ate.value || mes <= ate.value);
   });
 
-  // 3) Tabela (textContent evita injetar HTML)
+  
   const tbody = document.getElementById('tx-linhas');
   tbody.replaceChildren();
   lista.forEach((t) => {
@@ -91,17 +87,17 @@ function atualizar() {
     tbody.appendChild(tr);
   });
 
-  // 4) Estado vazio
+  
   document.getElementById('tx-tabela').hidden = lista.length === 0;
   document.getElementById('vazio').hidden = lista.length > 0;
   document.getElementById('vazio-texto').textContent = periodoInvalido
     ? 'Ajuste o período para ver resultados.'
     : 'Altere os filtros para ver resultados.';
 
-  // 5) Total
+  
   document.getElementById('total').textContent = moeda(lista.reduce((soma, t) => soma + t.valor, 0));
 
-  // 6) Chips de filtros aplicados
+  
   const chips = [];
   if (inst.value) chips.push(inst.value);
   if (cat.value) chips.push(cat.value);
@@ -116,7 +112,7 @@ function atualizar() {
   document.getElementById('aplicados').hidden = chips.length === 0;
 }
 
-/* ---------- Eventos ---------- */
+
 Object.values(campos).forEach((campo) => campo.addEventListener('input', atualizar));
 
 document.getElementById('limpar').addEventListener('click', () => {
@@ -125,7 +121,7 @@ document.getElementById('limpar').addEventListener('click', () => {
   campos.busca.focus();
 });
 
-// Período inicial igual ao do design (Jan/2026 a Set/2026)
+
 campos.de.value = '2026-01';
 campos.ate.value = '2026-09';
 atualizar();

@@ -1,17 +1,11 @@
-/* ==========================================================
-   Open Finance Hub — inicio.css (estilos só da Visão Consolidada)
-   Depende de base.css, layout.css e componentes.css
-   ========================================================== */
-
-/* Card genérico */
-.card {
+ .card {
   padding: var(--esp-16) var(--esp-24) var(--esp-24) 20px;
   background: var(--cor-sf);
   border: 1px solid var(--cor-ln);
   border-radius: var(--raio-14);
 }
 
-/* Linha de resumo: total (largura fixa) + gráfico (resto) */
+
 .summary {
   display: grid;
   grid-template-columns: 360px 1fr;
@@ -23,7 +17,7 @@
 
 .card__total { margin-top: var(--esp-8); font: var(--font-28-extrabold); font-size: 32px; }
 
-/* Card do gráfico */
+
 .card--chart {
   display: flex;
   align-items: center;
@@ -31,8 +25,7 @@
   padding: var(--esp-16) var(--esp-24) var(--esp-16) 20px;
 }
 
-/* Rosca: conic-gradient com as proporções de |valor| / soma dos |valores|
-   Investimentos ≈ 71,5% · Contas ≈ 22,9% · Crédito ≈ 5,6% */
+
 .donut {
   flex: none;
   width: 110px;
@@ -43,12 +36,12 @@
     var(--cor-bad) 94.4% 100%
   );
   border-radius: 50%;
-  /* "Fura" o centro para virar rosca */
+
   -webkit-mask: radial-gradient(circle, transparent 32px, #000 33px);
           mask: radial-gradient(circle, transparent 32px, #000 33px);
 }
 
-/* Legenda */
+
 .legend { display: grid; gap: var(--esp-8); }
 
 .legend__item {
@@ -66,10 +59,10 @@
 .legend__name  { font: var(--font-14-regular); font-size: 13px; color: var(--cor-pri); }
 .legend__value { font: var(--font-14-regular); font-weight: 700; }
 
-/* ---------- 8. Instituições ---------- */
+
 .section-title { margin-bottom: var(--esp-24); font: var(--font-16-extrabold); }
 
-/* Colunas de até 430px; empilha sozinho quando falta espaço */
+
 .inst-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 430px));
@@ -90,14 +83,105 @@
 .inst__name { font: var(--font-14-regular); font-weight: 700; }
 .inst__desc { font: var(--font-12-regular); color: var(--cor-mu); }
 
-/* Saldo à direita */
+
 .inst__balance { text-align: right; }
 .inst__value { font: var(--font-14-regular); font-weight: 700; }
 
-/* ---------- Responsividade da tela ---------- */
+
 @media (max-width: 900px) {
-  /* Cards empilhados em 1 coluna */
-  .summary { grid-template-columns: 1fr; }
-  .card--chart { flex-wrap: wrap; }
-  .inst-list { grid-template-columns: 1fr; }
+
+  body { background: var(--cor-sf); }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+    height: 62px;
+    padding: var(--esp-8) var(--esp-8) 0;
+    border-bottom: 1px solid var(--cor-ln);
+  }
+
+  .topbar__left { gap: 0; }
+
+  .topbar__title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .profile__email { display: block; }
+
+
+  .logout {
+    display: flex;
+    position: fixed;
+    top: var(--esp-8);
+    right: var(--esp-8);
+    z-index: 6;
+    height: 36px;
+    margin: 0;
+    padding: 0 var(--esp-8);
+  }
+
+  .main {
+    gap: var(--esp-16);
+    padding: var(--esp-16) var(--esp-8);
+  }
+
+  
+  .summary { grid-template-columns: 1fr; gap: var(--esp-12); }
+
+  .card--total {
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+
+  .card__total { margin-top: var(--esp-4); }
+
+ 
+  .card--chart {
+    flex-wrap: nowrap;
+    gap: 18px;
+    padding: var(--esp-16) var(--esp-16) var(--esp-16) 14px;
+  }
+
+  .legend { gap: var(--esp-12); }
+
+  .legend__item {
+    grid-template-columns: 8px 1fr;
+    gap: 0 var(--esp-8);
+    line-height: 1.2;
+  }
+
+  .legend__name {
+    color: var(--cor-mu);
+    line-height: 1.2;
+  }
+
+ 
+  .legend__value {
+    grid-column: 1 / -1;
+    line-height: 1.2;
+  }
+
+
+  .section-title { margin-bottom: var(--esp-8); }
+
+  .inst-list { grid-template-columns: 1fr; gap: var(--esp-8); }
+
+  .inst {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .inst .inst-logo { width: 40px; height: 40px; }
 }
